@@ -59,7 +59,17 @@ def _finish(df: pd.DataFrame) -> pd.DataFrame:
     return _derive(df)
 
 def load_demo() -> pd.DataFrame:
-    raw = pd.read_csv(os.path.join(HERE, "data", "hr_analytics_raw.csv"))
+    """Bundled demo data: data/hr_analytics_raw.csv, or (fallback) the 'Data' sheet of the original
+    data/HR Analytics.xlsx from the HR-analytics project."""
+    d = os.path.join(HERE, "data")
+    csv, xlsx = os.path.join(d, "hr_analytics_raw.csv"), os.path.join(d, "HR Analytics.xlsx")
+    if os.path.exists(csv):
+        raw = pd.read_csv(csv)
+    elif os.path.exists(xlsx):
+        raw = pd.read_excel(xlsx, sheet_name="Data", usecols=list(DEMO_MAP))
+    else:
+        raise FileNotFoundError("Demo data not found. Add data/hr_analytics_raw.csv (or data/HR Analytics.xlsx) "
+                                "to the repo, or use 'Upload Workday export'.")
     return _finish(raw.rename(columns=DEMO_MAP))
 
 def load_upload(file) -> pd.DataFrame:
