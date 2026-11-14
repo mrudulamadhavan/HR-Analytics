@@ -10,7 +10,7 @@ from excel_report import build_workbook
 
 ORANGE, GREY = "#FF6C37", "#9E9E9E"
 SEQ = ["#FFE0D2", "#FFA980", ORANGE, "#C94A17"]
-st.set_page_config(page_title="HR Analytics Dashboard", page_icon="📊", layout="wide")
+st.set_page_config(page_title="Workday HR Dashboard", page_icon="📊", layout="wide")
 st.markdown("""<style>
 .block-container{padding-top:1.4rem} h1,h2,h3{letter-spacing:-.01em}
 [data-testid="stMetricValue"]{font-size:1.6rem}
